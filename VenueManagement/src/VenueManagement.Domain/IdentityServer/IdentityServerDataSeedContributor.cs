@@ -164,6 +164,29 @@ public class IdentityServerDataSeedContributor : IDataSeedContributor, ITransien
 
 
 
+        //Blazor Server Tiered Client
+        var blazorServerTieredClientId = configurationSection["VenueManagement_BlazorServerTiered:ClientId"];
+        if (!blazorServerTieredClientId.IsNullOrWhiteSpace())
+        {
+            var blazorServerTieredClientRootUrl = configurationSection["VenueManagement_BlazorServerTiered:RootUrl"].EnsureEndsWith('/');
+
+            /* VenueManagement_BlazorServerTiered client is only needed if you created a tiered blazor server
+             * solution. Otherwise, you can delete this client. */
+
+            await CreateClientAsync(
+                name: blazorServerTieredClientId,
+                clientUri: blazorServerTieredClientRootUrl,
+                scopes: commonScopes,
+                grantTypes: new[] { "hybrid" },
+                secret: (configurationSection["VenueManagement_BlazorServerTiered:ClientSecret"] ?? "1q2w3e*").Sha256(),
+                redirectUri: $"{blazorServerTieredClientRootUrl}signin-oidc",
+                postLogoutRedirectUri: $"{blazorServerTieredClientRootUrl}signout-callback-oidc",
+                frontChannelLogoutUri: $"{blazorServerTieredClientRootUrl}Account/FrontChannelLogout",
+                corsOrigins: new[] { blazorServerTieredClientRootUrl.RemovePostFix("/") }
+            );
+        }
+
+
         // Swagger Client
         var swaggerClientId = configurationSection["VenueManagement_Swagger:ClientId"];
         if (!swaggerClientId.IsNullOrWhiteSpace())

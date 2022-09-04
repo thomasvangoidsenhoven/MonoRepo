@@ -258,8 +258,8 @@ src/VenueManagement.IdentityServer/Logs/*
 src/VenueManagement.HttpApi.Host/Logs/*
 src/VenueManagement.HttpApi.HostWithIds/Logs/*
 src/VenueManagement.DbMigrator/Logs/*
+src/VenueManagement.Blazor.Server/Logs/*
 src/VenueManagement.Blazor/Logs/*
-src/VenueManagement.Blazor.Tiered/Logs/*
 
 # Use abp install-libs to restore.
 **/wwwroot/libs/*
