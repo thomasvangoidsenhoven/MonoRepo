@@ -14,5 +14,6 @@ public class BookStoreApplicationAutoMapperProfile : Profile
 
         CreateMap<Book, BookViewModel>();
         CreateMap<CreateOrUpdateBookViewModel, Book>();
+        CreateMap<BookViewModel, CreateOrUpdateBookViewModel>();
     }
 }
